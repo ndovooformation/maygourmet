@@ -1,0 +1,24 @@
+{
+  "name": "maygourmet",
+  "version": "1.0.0",
+  "description": "May Gourmet est une palteforme de réservation de plats.",
+  "main": "serveur.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndovooformation/maygourmet.git"
+  },
+  "keywords": [],
+  "author": "Nourdine COMBO",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ndovooformation/maygourmet/issues"
+  },
+  "homepage": "https://github.com/ndovooformation/maygourmet#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
