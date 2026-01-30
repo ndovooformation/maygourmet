@@ -8,6 +8,9 @@ app.set('views', './views');
 // Je précise que nous utilisons le moteur EJS pour les vues
 app.set('view engine', 'ejs');
 
+// Je précise que j'utilise le dossier 'public' qui contient les fichiers statics
+app.use(express.static("public"));
+
 // API ROUTE pour la page racine : localhost:3004/
 app.get('/', (req, res) => {
     // Message à afficher : Bienvenue chez MayGourmet
