@@ -7,6 +7,8 @@ const myConnection = require('express-myconnection');
 
 const app = express();
 
+app.use(express.urlencoded({extended:false}));
+
 // Je configure les éléments attendus pour me connecter à MySQL 
 const optionsConnexionBaseDeDonnees = {
     host: "localhost",
@@ -53,11 +55,38 @@ app.get('/api/accueil', (req, res) => {
 });
 
 app.get('/api/equipe', (req, res) => {
-    console.log("Je passe dans la route API REST /api/equipe");
-    res.render('equipe');
+    // 1. Je me connecte à la BDD grâce à la méthode getConnection()
+    req.getConnection((erreur, connection) => {
+        if(erreur) { // Je vérifie s'il y a une erreur lors de la connexion à la BDD
+            console.log(erreur);
+        } else {
+            connection.query("SELECT * FROM equipe", [], (err, resultatEquipe) => {
+                if (err) {
+                    console.log("Erreur dans la requête SQL SELECT : ", err);
+                    return res.status(500).send("Erreur dans la requête SQL SELECT :");
+                } else {
+                    console.log(" Mon équipe : ", resultatEquipe);
+
+                    // Je retourne au client le résultat de la requpete SQL
+                    res.render("equipe", {resultatEquipe});
+                }
+            });
+        }
+    });
+
 });
 
 
+/* J'ajoute un fournisseur dans la table fournisseur. Pour cela, j'utilise la méthode POST
+*/
+app.post('/api/fournisseur', (req, res) => {
+    console.log("Corps de la requête : ", req);
+});
+
+
+app.get('/api/fournisseur', (req, res) => {
+    res.render("fournisseur");
+});
 
 
 

@@ -11,5 +11,18 @@
      <%- include('navbar') -%>
 
     <H2>Mon équipe MayGourmet</H2>
+    <div class="row">
+        <% resultatEquipe.forEach((result) =>{ %>
+        <div class="card">
+            <img class="team-img" src="/images/photo-1740252117027-4275d3f84385.avif" alt="" srcset="">
+            <div class="container">
+                <h4><b><%= result.nom %> <%= result.prenom %></b></h4>
+                <p><%= result.poste %></p>
+            </div>
+        </div>
+        
+        <% }); %>
+    </div>
+    
 </body>
 </html>
