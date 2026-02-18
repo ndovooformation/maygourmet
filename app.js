@@ -81,6 +81,34 @@ app.get('/api/equipe', (req, res) => {
 */
 app.post('/api/fournisseur', (req, res) => {
     console.log("Corps de la requête : ", req.body);
+    const nomFournisseur = req.body.nomFournisseur;
+    const responsableFournisseur = req.body.responsableFournisseur;
+    const emailFournisseur = req.body.emailFournisseur;
+    const telephoneFournisseur = req.body.telephoneFournisseur;
+    const adressePostaleFournisseur = req.body.adresseFournisseur;
+    const presentationFournisseur = req.body.presentationFournisseur;
+
+    const requeteSql = "INSERT INTO fournisseur(nom, responsable, mail, telephone, adresse_postale, presentation_forunisseur ) VALUES(?, ?, ?, ?, ?,?)";
+
+    const ordreChamps = [nomFournisseur, responsableFournisseur, emailFournisseur,telephoneFournisseur, adressePostaleFournisseur,presentationFournisseur];
+
+    // Je me connecte à la base de données
+    req.getConnection((erreur, connection) => {
+        if(erreur) { // sil y a une erreur
+            console.log("Erreur de connxion à la BDD : ", erreur);
+        } else { // si j'ai réussi à me connecter à la BDD
+            connection.query(requeteSql, ordreChamps, (err, nouveauFournisseur) => {
+                if(err) {
+                    console.log("Erreur d'ajout fournisseur :", err);
+                } else {
+                    console.log("Bravo! Nouveau fourniseur ajouté.");
+                    // Je redirige vers la page d'accueil
+                    res.status(300).redirect("/accueil");
+                }
+
+            });
+        }
+    });
 
 });
 
