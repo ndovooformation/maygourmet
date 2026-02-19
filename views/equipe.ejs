@@ -17,7 +17,8 @@
             <img class="team-img" src="/images/photo-1740252117027-4275d3f84385.avif" alt="" srcset="">
             <div class="container">
                 <h4><b><%= result.nom %> <%= result.prenom %></b></h4>
-                <p><%= result.poste %></p>
+                <p><%= result.poste %></p> <br>
+                <input type="button" value="supprimer" onclick="supprimer('<%= result.id =%>')">
             </div>
         </div>
         
@@ -25,4 +26,8 @@
     </div>
     
 </body>
+
+<script>
+    
+</script>
 </html>

@@ -76,6 +76,30 @@ app.get('/api/equipe', (req, res) => {
 
 });
 
+// API Route pour supprimer un membre de l'équipe
+// Methode : DELETE
+// exemple : localhost:3004/api/equipe/1
+app.delete('/api/equipe/:id', (req, res) => {
+    const idMembreEquipe = req.params.id;
+    const queryDelete = "DELETE FROM equipe WHERE id = ?";
+
+    req.getConnection((erreur, connection) => {
+        if(erreur) {
+            console.log("Erreur suppression equipe : ", erreur);
+        } else {
+            connection.query(queryDelete, [idMembreEquipe], (err, resultat) => {
+                if(err) {
+                    console.log("Erreur requete Suppression : ", err);
+                } else {
+                    console.log("Bravo! Le membre est supprimé dans la table equipe");
+
+                    res.status(200).redirect("/api/accueil");
+                }
+            });
+        }
+    });
+});
+
 
 /* J'ajoute un fournisseur dans la table fournisseur. Pour cela, j'utilise la méthode POST
 */
@@ -103,7 +127,7 @@ app.post('/api/fournisseur', (req, res) => {
                 } else {
                     console.log("Bravo! Nouveau fourniseur ajouté.");
                     // Je redirige vers la page d'accueil
-                    res.status(300).redirect("/accueil");
+                    res.status(300).redirect("/api/accueil");
                 }
 
             });
