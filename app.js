@@ -93,7 +93,8 @@ app.delete('/api/equipe/:id', (req, res) => {
                 } else {
                     console.log("Bravo! Le membre est supprimé dans la table equipe");
 
-                    res.status(200).redirect("/api/accueil");
+                    //res.status(200).redirect("/api/accueil");
+                    res.status(200).json({ routeAccueil: "/api/accueil"});
                 }
             });
         }

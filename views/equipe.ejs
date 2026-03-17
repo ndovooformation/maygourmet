@@ -18,7 +18,8 @@
             <div class="container">
                 <h4><b><%= result.nom %> <%= result.prenom %></b></h4>
                 <p><%= result.poste %></p> <br>
-                <input type="button" value="supprimer" onclick="supprimer('<%= result.id =%>')">
+                <input type="button" 
+                value="supprimer" onclick="supprimer('<%= result.id %>')">
             </div>
         </div>
         
@@ -28,6 +29,18 @@
 </body>
 
 <script>
-    
+    function supprimer(id) {
+        const routeComplete = '/api/equipe/'+ id;
+
+        fetch(
+            routeComplete, {method: "DELETE"}
+        ).then(
+            (reponse) => response.json()
+        ).then(
+            (donnee) => window.location.href = donnee.routeAccueil
+        ).catch(
+            (erreur) => console.log(erreur)
+        )
+    }
 </script>
 </html>
