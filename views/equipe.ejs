@@ -5,12 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon équipe</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <script src="/js/modal.js" defer></script>
+    <script src="/js/script.js"></script>
 </head>
 <body>
     <!-- inclure le fichier navbar.ejs pur avoir la barre de navigation -->
      <%- include('navbar') -%>
 
     <H2>Mon équipe MayGourmet</H2>
+    <div class="row">
+        <button id="myBtn">Ajouter membre</button>
+
+        
+    </div>
+    <div class="row">
+        <div class="modal" id="myModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Je suis le Modal..</p>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <% resultatEquipe.forEach((result) =>{ %>
         <div class="card">
@@ -28,19 +44,4 @@
     
 </body>
 
-<script>
-    function supprimer(id) {
-        const routeComplete = '/api/equipe/'+ id;
-
-        fetch(
-            routeComplete, {method: "DELETE"}
-        ).then(
-            (reponse) => response.json()
-        ).then(
-            (donnee) => window.location.href = donnee.routeAccueil
-        ).catch(
-            (erreur) => console.log(erreur)
-        )
-    }
-</script>
 </html>
