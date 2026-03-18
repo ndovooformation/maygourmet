@@ -101,6 +101,13 @@ app.delete('/api/equipe/:id', (req, res) => {
     });
 });
 
+/**
+ * API pour ajouter un membre d'équipe.
+ * Le membre sera inséré dan sla table equipe.
+ */
+app.post("/api/equipe", (req, res) => {
+    // A compléter
+});
 
 /* J'ajoute un fournisseur dans la table fournisseur. Pour cela, j'utilise la méthode POST
 */

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/modal.css">
     <script src="/js/modal.js" defer></script>
-    <script src="/js/script.js"></script>
+    <script src="/js/script.js" defer></script>
 </head>
 <body>
     <!-- inclure le fichier navbar.ejs pur avoir la barre de navigation -->
@@ -16,14 +16,86 @@
     <H2>Mon équipe MayGourmet</H2>
     <div class="row">
         <button id="myBtn">Ajouter membre</button>
-
-        
     </div>
     <div class="row">
         <div class="modal" id="myModal">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Je suis le Modal..</p>
+                <!-- En-tête du modal -->
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h3>Créer un membre</h3>
+                </div>
+                
+                <!-- Corps du modal -->
+                <div class="modal-body">
+                    <p>Je suis dans modal body.</p>
+                    <p>Formulaire d'inscription</p>
+
+                    <!-- Formulaire d'ajout du nouveau membre -->
+                     <div class="container">
+                        <form action="/api/equipe" method="post">
+                            <!-- Ligne 1 du formulaire pour saisir le nom-->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="nom">Nom :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="nom" id="nom">
+                                </div>
+                            </div>
+                            <!-- Ligne 2 pour saisir le prénom -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="prenom">Prénom : </label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="prenom" id="prenom">
+                                </div>
+                            </div>
+                            <!-- Ligne 3 pour saisir le mail -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="mail"> Mail :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="email" name="email" id="email">
+                                </div>
+                            </div>
+
+                            <!-- Ligne 4 pour saisir le téléphone -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="telephone"> Téléphone :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="telephone" id="telephone">
+                                </div>
+                            </div>
+
+                            <!-- Ligne 5 pour seaisir le poste -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="poste">Poste :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="poste" id="poste">
+                                </div>
+                            </div>
+
+                            <!-- Ligne 6 pour saisir l'addresse postale -->
+                             <div class="row">
+                                <div class="col-25">
+                                    <label for="addressePostale">Adresse postale :</label>
+                                </div>
+                             </div>
+                        </form>
+                     </div>
+                </div>
+                
+                <!-- Pied de page du modal -->
+                <div class="modal-footer">
+                    <button id="btnEnrgistrer">Enregistrer</button>
+                </div>
             </div>
         </div>
     </div>
