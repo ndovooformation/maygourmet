@@ -26,9 +26,8 @@
                     <h3>Créer un membre</h3>
                 </div>
                 
-                <!-- Corps du modal -->
+                <!-- Corps du modal d'inscription -->
                 <div class="modal-body">
-                    <p>Je suis dans modal body.</p>
                     <p>Formulaire d'inscription</p>
 
                     <!-- Formulaire d'ajout du nouveau membre -->
@@ -82,11 +81,36 @@
                                 </div>
                             </div>
 
-                            <!-- Ligne 6 pour saisir l'addresse postale -->
+                            <!-- Ligne 6 pour sasir la date de recrutement -->
                              <div class="row">
                                 <div class="col-25">
-                                    <label for="addressePostale">Adresse postale :</label>
+                                    <label for="dateRecrutement">Date recrutement : </label>
                                 </div>
+                                <div class="col-75">
+                                    <input type="date" name="dateRecrutement" id="dateRecrutement">
+                                </div>
+                             </div>
+                             <!-- Ligne 7 pour saisir l'addresse postale -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="adressePostale">Adresse :</label>
+                                </div>
+                                <div class="75">
+                                    <input type="text" name="adressePostale" id="adressePostale">
+                                </div>
+                            </div>
+                            <!-- Ligne 8 pour saisir la présenation -->
+                             <div class="row">
+                                <div class="col-25">
+                                    <label for="presentation">Présentation :</label>
+                                </div>
+                                <div class="col-75">
+                                    <textarea name="presentation" id="presentation" cols="30" rows="10"></textarea>
+                                </div>
+                             </div>
+
+                             <div class="row">
+                                <input type="submit" value="Enregistrer">
                              </div>
                         </form>
                      </div>
@@ -94,7 +118,7 @@
                 
                 <!-- Pied de page du modal -->
                 <div class="modal-footer">
-                    <button id="btnEnrgistrer">Enregistrer</button>
+                    <H4>MayGourmet Restaurant</H4>
                 </div>
             </div>
         </div>
@@ -108,10 +132,125 @@
                 <p><%= result.poste %></p> <br>
                 <input type="button" 
                 value="supprimer" onclick="supprimer('<%= result.id %>')">
+                
+                <!-- <input type="text" onclick="modifier()"> -->
+                 <input type="button" value="modifier" id="boutonModifier" onclick="modifier(
+                    '<%= result.id %>', '<%= result.nom %>','<%= result.prenom %>', '<%= result.mail %>',
+                    '<%= result.telephone %>', '<%= result.poste %>', '<%= result.adresse_postale %>',
+                    '<%= result.presentation %>', '<%= result.date_recrutement %>'
+                    )">  
             </div>
         </div>
         
         <% }); %>
+    </div>
+
+    <!-- Modal de modification d'équipe -->
+    <div class="row">
+        <div class="modal" id="myModalEdit">
+            <div class="modal-content">
+                <!-- En-tête du modal -->
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h3>Modifier un membre</h3>
+                </div>
+                
+                <!-- Corps du modal d'inscription -->
+                <div class="modal-body">
+                    <p>Formulaire de modification</p>
+
+                    <!-- Formulaire d'ajout du nouveau membre -->
+                     <div class="container">
+                        <form action="/api/equipe" method="post">
+                            <!-- Ligne 1 du formulaire pour saisir le nom-->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="nom">Nom :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="nom" id="nom">
+                                </div>
+                            </div>
+                            <!-- Ligne 2 pour saisir le prénom -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="prenom">Prénom : </label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="prenom" id="prenom">
+                                </div>
+                            </div>
+                            <!-- Ligne 3 pour saisir le mail -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="email"> Mail :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="email" name="email" id="email">
+                                </div>
+                            </div>
+
+                            <!-- Ligne 4 pour saisir le téléphone -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="telephone"> Téléphone :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="telephone" id="telephone">
+                                </div>
+                            </div>
+
+                            <!-- Ligne 5 pour seaisir le poste -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="poste">Poste :</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="poste" id="poste">
+                                </div>
+                            </div>
+
+                            <!-- Ligne 6 pour sasir la date de recrutement -->
+                             <div class="row">
+                                <div class="col-25">
+                                    <label for="dateRecrutement">Date recrutement : </label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="date" name="dateRecrutement" id="dateRecrutement">
+                                </div>
+                             </div>
+                             <!-- Ligne 7 pour saisir l'addresse postale -->
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="adressePostale">Adresse :</label>
+                                </div>
+                                <div class="75">
+                                    <input type="text" name="adressePostale" id="adressePostale">
+                                </div>
+                            </div>
+                            <!-- Ligne 8 pour saisir la présenation -->
+                             <div class="row">
+                                <div class="col-25">
+                                    <label for="presentation">Présentation :</label>
+                                </div>
+                                <div class="col-75">
+                                    <textarea name="presentation" id="presentation" cols="30" rows="10"></textarea>
+                                </div>
+                             </div>
+
+                             <div class="row">
+                                <input type="submit" value="Enregistrer">
+                             </div>
+                        </form>
+                     </div>
+                </div>
+                
+                <!-- Pied de page du modal -->
+                <div class="modal-footer">
+                    <H4>MayGourmet Restaurant</H4>
+                </div>
+            </div>
+        </div>
     </div>
     
 </body>

@@ -76,6 +76,53 @@ app.get('/api/equipe', (req, res) => {
 
 });
 
+app.get('/api/equipe/:id', (req, res) => {
+    const idMembreEquipe = req.params.id;
+    const querySelectEquipe = "SELECT * FROM equipe WHERE id = ?";
+    
+    req.getConnection((erreur, connectionReussie) => {
+        if(erreur) {
+            console.log("Echec connection à la base de données :", erreur);
+        } else {
+            connectionReussie.query(querySelectEquipe, [idMembreEquipe], (err, resultatMembre) => {
+                if (err) {
+                    console.log("Echec récupération un membre d' equipe : ", err);
+                } else {
+                    console.log("Bravo. Vous avez retrouvé votre coéquipier.");
+                    res.render("equipe", resultatMembre);
+                }
+            });
+        }
+    });
+});
+
+app.put('/api/equipe/:id', (req, res) => {
+    // Je détaille la manière dont je vais modifier les données
+});
+
+/*
+app.put('/api/equipe/:id', (req, res) => {
+    const idMembreEquipe = req.params.id;
+    const querySelectEquipe = "SELECT * FROM equipe WHERE id = ?";
+
+    req.getConnection((erreur, connectionReussie) => {
+        if (erreur) {
+            console.log("Echec récupération un membre d' equipe : ", err);
+        } else {
+            connectionReussie.query(querySelectEquipe, [idMembreEquipe], (err, memebreTrouve) => {
+                if (err) {
+                    console.log("Echec récupération un membre d' equipe : ", err);
+                } else {
+                    console.log("Bravo. Vous avez retrouvé votre coéquipier.");
+                    memebreTrouve.mail = req.body.mail;
+                    //res.render("equipe", resultatMembre);
+                }
+            });
+        }
+    });
+});
+*/
+
 // API Route pour supprimer un membre de l'équipe
 // Methode : DELETE
 // exemple : localhost:3004/api/equipe/1
@@ -107,6 +154,34 @@ app.delete('/api/equipe/:id', (req, res) => {
  */
 app.post("/api/equipe", (req, res) => {
     // A compléter
+    console.log("=== Aout Equipe === Corps de la requête : ", req.body);
+    const nomEquipe = req.body.nom;
+    const prenomEquipe = req.body.prenom;
+    const email = req.body.email;
+    const telephone = req.body.telephone;
+    const posteEquipe = req.body.poste;
+    const adressePostale = req.body.adressePostale;
+    const presentation = req.body.presentation;
+    const dateRecrutement = req.body.dateRecrutement;
+
+    const requeteAjoutEquipe = "INSERT INTO equipe(nom, prenom, mail, telephone, poste, adresse_postale, presentation, date_recrutement) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    const ordreChamps = [nomEquipe, prenomEquipe, email, telephone, posteEquipe, adressePostale, presentation, dateRecrutement];
+
+    req.getConnection((erreur, connection) => {
+        if (erreur) {
+            console.log(" Echec de connection à la base de donnée : " , erreur);
+        } else {
+            connection.query(requeteAjoutEquipe, ordreChamps, (err, ajoutReussi) => {
+
+                if (err) {
+                    console.log(" Echec Ajout dans la table equipe : " , err);
+                } else {
+                    console.log("Bravo. Membre ajouté avec succès dans equipe");
+                    res.status(300).redirect("/api/equipe");
+                }
+            });
+        }
+    });
 });
 
 /* J'ajoute un fournisseur dans la table fournisseur. Pour cela, j'utilise la méthode POST
@@ -148,6 +223,8 @@ app.post('/api/fournisseur', (req, res) => {
 app.get('/api/fournisseur', (req, res) => {
     res.render("fournisseur");
 });
+
+
 
 
 
